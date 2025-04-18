@@ -7,7 +7,7 @@
   "canEditSource": true,
   "contentEditable": false,
   "gizmo": {
-    "title": "portfolio sidebar-theme",
+    "title": "portfolio sidebar",
     "description": "",
     "icon": "icons:android",
     "color": "purple",
@@ -40,7 +40,7 @@
   },
   "demoSchema": [
     {
-      "tag": "portfolio-sidebar-theme",
+      "tag": "portfolio-sidebar",
       "content": "",
       "properties": {
         "title": "\"\""

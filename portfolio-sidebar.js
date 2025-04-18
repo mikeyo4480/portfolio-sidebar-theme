@@ -5,18 +5,16 @@
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
-import "./portfolio-sidebar.js";
-import "@haxtheweb/scroll-button/scroll-button.js";
 
 /**
- * `portfolio-sidebar-theme`
+ * `portfolio-sidebar`
  *
  * @demo index.html
- * @element portfolio-sidebar-theme
+ * @element portfolio-sidebar
  */
-export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
+export class PortfolioSidebar extends DDDSuper(I18NMixin(LitElement)) {
   static get tag() {
-    return "portfolio-sidebar-theme";
+    return "portfolio-sidebar";
   }
 
   constructor() {
@@ -61,17 +59,32 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
         }
         h3 span {
           font-size: var(
-            --portfolio-sidebar-theme-label-font-size,
+            --portfolio-sidebar-label-font-size,
             var(--ddd-font-size-s)
           );
         }
-        portfolio-sidebar {
-          display: block;
-          margin: var(--ddd-spacing-2);
-          padding: var(--ddd-spacing-4);
+        .sidenav {
+          height: 100%;
+          width: 250px;
+          position: fixed;
+          top: 0;
+          left: 0;
+          background-color: var(--ddd-theme-default-slateGray);
+          overflow-x: hidden;
         }
-        .Home {
-          margin-left: 250px;
+        button {
+          font-family: sans-serif;
+          font-size: 30px;
+          text-align: center;
+          justify-content: center;
+          background-color: var(--ddd-theme-default-slateGray);
+          color: white;
+          border : none;
+          margin-top: 100px;
+          margin-left: 42px;
+          text-align: center;
+          padding: var(--ddd-spacing-4);
+          display: block;
         }
       `,
     ];
@@ -80,23 +93,16 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
   // Lit render the HTML
   render() {
     return html` <div class="wrapper">
-      <portfolio-sidebar></portfolio-sidebar>
-      <h3><span>${this.t.title}:</span> ${this.title}</h3>
-      <div class="Home">
-        <h1>About me</h1>
-        <p>
-          Hello Everyone! My name is Michael OHanlon and I'm currently attending
-          Penn State University.
-        </p>
+      <div class="sidenav">
+        <button>Home</button>
+        <button>CV</button>
+        <button>Research</button>
+        <button>Contact</button>
+        <scroll-button></scroll-button>
+
+
+        <slot></slot>
       </div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <slot></slot>
     </div>`;
   }
 
@@ -109,7 +115,4 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
   }
 }
 
-globalThis.customElements.define(
-  PortfolioSidebarTheme.tag,
-  PortfolioSidebarTheme
-);
+globalThis.customElements.define(PortfolioSidebar.tag, PortfolioSidebar);
