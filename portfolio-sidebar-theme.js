@@ -22,18 +22,7 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
   constructor() {
     super();
     this.title = "";
-    this.t = this.t || {};
-    this.t = {
-      ...this.t,
-      title: "Title",
-    };
-    this.registerLocalization({
-      context: this,
-      localesPath:
-        new URL("./locales/portfolio-sidebar-theme.ar.json", import.meta.url)
-          .href + "/../",
-      locales: ["ar", "es", "hi", "zh"],
-    });
+    this.pages = [];
   }
 
   // Lit reactive properties
@@ -41,6 +30,7 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
     return {
       ...super.properties,
       title: { type: String },
+      pages: { type: Array },
     };
   }
 
@@ -54,11 +44,9 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
           color: var(--ddd-theme-primary);
           background-color: var(--ddd-theme-accent);
           font-family: var(--ddd-font-navigation);
+          overflow-x: hidden;
         }
-        .wrapper {
-          margin: var(--ddd-spacing-2);
-          padding: var(--ddd-spacing-4);
-        }
+
         h3 span {
           font-size: var(
             --portfolio-sidebar-theme-label-font-size,
@@ -67,11 +55,37 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
         }
         portfolio-sidebar {
           display: block;
+          width: 310px;
+          position: fixed;
+          top: 0;
+          left: 0;
+          bottom: 0;
           margin: var(--ddd-spacing-2);
           padding: var(--ddd-spacing-4);
         }
-        .Home {
-          margin-left: 250px;
+        h1 {
+          font-size: 48px;
+          font-weight: bold;
+          color: var(--ddd-theme-default-beaver80);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+          text-align: right;
+          margin-top: 10px;
+          margin-right: 20px;
+          margin-bottom: 0px;
+        }
+        portfolio-sidebar a {
+          font-family: sans-serif;
+          font-size: 30px;
+          text-align: center;
+          justify-content: center;
+          border: none;
+          margin-top: 100px;
+          margin-left: 42px;
+          text-align: center;
+          padding: var(--ddd-spacing-4);
+          display: block;
+          color: white;
+          background-color: red;
         }
       `,
     ];
@@ -79,25 +93,49 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
 
   // Lit render the HTML
   render() {
-    return html` <div class="wrapper">
-      <portfolio-sidebar></portfolio-sidebar>
-      <h3><span>${this.t.title}:</span> ${this.title}</h3>
-      <div class="Home">
-        <h1>About me</h1>
-        <p>
-          Hello Everyone! My name is Michael OHanlon and I'm currently attending
-          Penn State University.
-        </p>
+    return html`
+      <portfolio-sidebar>
+        <ul>
+          ${this.pages.map(
+            (page, index) => html`
+              
+                <a
+                  href="#${page.number}"
+                  @click="${this.linkChange}"
+                  data-index="${index}"
+                >
+                  ${page.title}
+                </a>
+              
+            `
+          )}
+        </ul>
+      </portfolio-sidebar>
+      <div class="wrapper" @page-added="${this.addPage}">
+        <h1>Portfolio</h1>
+        <slot></slot>
       </div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <slot></slot>
-    </div>`;
+    `;
+  }
+
+  linkChange(e) {
+    e.preventDefault();
+    const index = parseInt(e.target.getAttribute("data-index"));
+    if (index >= 0 && this.pages[index]) {
+      this.pages[index].element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }
+  addPage(e) {
+    const element = e.detail.value;
+    const page = {
+      number: element.pagenumber,
+      title: element.title,
+      element: element,
+    };
+    this.pages = [...this.pages, page];
   }
 
   /**

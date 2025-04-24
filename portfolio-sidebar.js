@@ -20,19 +20,8 @@ export class PortfolioSidebar extends DDDSuper(I18NMixin(LitElement)) {
   constructor() {
     super();
     this.title = "";
-    this.t = this.t || {};
-    this.t = {
-      ...this.t,
-      title: "Title",
     };
-    this.registerLocalization({
-      context: this,
-      localesPath:
-        new URL("./locales/portfolio-sidebar-theme.ar.json", import.meta.url)
-          .href + "/../",
-      locales: ["ar", "es", "hi", "zh"],
-    });
-  }
+    
 
   // Lit reactive properties
   static get properties() {
@@ -64,22 +53,22 @@ export class PortfolioSidebar extends DDDSuper(I18NMixin(LitElement)) {
           );
         }
         .sidenav {
-          height: 100%;
+          height: 100vh;
           width: 250px;
           position: fixed;
           top: 0;
           left: 0;
           background-color: var(--ddd-theme-default-slateGray);
-          overflow-x: hidden;
+          overflow: hidden;
         }
-        button {
+        a {
           font-family: sans-serif;
           font-size: 30px;
           text-align: center;
           justify-content: center;
           background-color: var(--ddd-theme-default-slateGray);
           color: white;
-          border : none;
+          border: none;
           margin-top: 100px;
           margin-left: 42px;
           text-align: center;
@@ -94,14 +83,8 @@ export class PortfolioSidebar extends DDDSuper(I18NMixin(LitElement)) {
   render() {
     return html` <div class="wrapper">
       <div class="sidenav">
-        <button>Home</button>
-        <button>CV</button>
-        <button>Research</button>
-        <button>Contact</button>
-        <scroll-button></scroll-button>
-
-
         <slot></slot>
+        <scroll-button></scroll-button>
       </div>
     </div>`;
   }

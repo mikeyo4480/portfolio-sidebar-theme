@@ -19,8 +19,20 @@
         margin: var(--ddd-spacing-0);
         padding: var(--ddd-spacing-0);
       }
+
       #demo {
-        margin: var(--ddd-spacing-2);
+        display: flex;
+        height: 100vh;
+        width: 100vw;
+      }
+      portfolio-sidebar {
+        width: 250px;
+      }
+      img {
+        width: 200px;
+        height: auto;
+        border-radius: 30px;
+        max-width: 100%;
       }
 
       #example {
@@ -28,23 +40,51 @@
         background-color: var(--ddd-accent-2);
         color: var(--ddd-primary-17);
       }
+
     </style>
     <title>portfolio-sidebar-theme</title>
   </head>
 
   <body>
     <div id="demo">
-      <!-- this is going to do whatever the tag's defaults are -->
-      <portfolio-sidebar-theme title="example"></portfolio-sidebar-theme>
-      <portfolio-sidebar-screen>
-        <div slot="screen" sid="0" title="Intro">
-          Welcome to the Intro Screen
+      <portfolio-sidebar-theme title="example">
+          <portfolio-sidebar-screen pagenumber="0" title="Intro">
+            <div>
+              <p>Hello Everyone, I am a currently a Sophomore at Penn State University. I am pursuing a B.S in Cybersecurity Analytics and Operations</p>
+              <img src="https://media.licdn.com/dms/image/v2/D4E03AQGfqfp98pNjEQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1678986853045?e=1750896000&v=beta&t=z0sb6EHeICLyMBlGllWuhUTTRnPiDIIZFKOj9345CF8 " alt="Profile Picture">
+            </div>
+          </portfolio-sidebar-screen>
+          <portfolio-sidebar-screen pagenumber="1" title="Resume">
+            <div>
+              This is the About Screen
+            </div>
+          </portfolio-sidebar-screen>
+          <portfolio-sidebar-screen pagenumber="2" title="Research">
+            <div>
+              This is the Contact Screen
+            </div>
+          </portfolio-sidebar-screen>
+          <portfolio-sidebar-screen pagenumber="3" title="Contact">
+            <div>
+              This is the Portfolio Screen
+            </div>
+            <div>
+              <p>Feel free to reach out to me at: <a href="mailto:
+          </portfolio-sidebar-screen>
+          <portfolio-sidebar-screen pagenumber="3" title="test">
+            <div>
+              This is the Portfolio Screen
+            </div>
+            
+          
+          
         </div>
-        <div slot="screen" sid="1" title="Home">This is the Home Screen</div>
-        <div slot="screen" sid="2" title="About">Learn more About Us</div>
-        <div slot="screen" sid="3" title="Contact">Get in Touch</div>
-      </portfolio-sidebar-screen>
+      </portfolio-sidebar-theme>
     </div>
+
     <script type="module" src="./portfolio-sidebar-theme.js"></script>
+    <script type="module" src="./portfolio-sidebar.js"></script>
+    <script type="module" src="./portfolio-sidebar-screen.js"></script>
+   
   </body>
 </html>
