@@ -75,6 +75,20 @@ export class PortfolioSidebar extends DDDSuper(I18NMixin(LitElement)) {
           padding: var(--ddd-spacing-4);
           display: block;
         }
+        scroll-button {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background-color: var(--ddd-theme-default-beaver80);
+          color: white;
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
       `,
     ];
   }

@@ -98,15 +98,13 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
         <ul>
           ${this.pages.map(
             (page, index) => html`
-              
-                <a
-                  href="#${page.number}"
-                  @click="${this.linkChange}"
-                  data-index="${index}"
-                >
-                  ${page.title}
-                </a>
-              
+              <a
+                href="#${page.number}"
+                @click="${this.linkChange}"
+                data-index="${index}"
+              >
+                ${page.title}
+              </a>
             `
           )}
         </ul>
@@ -131,7 +129,7 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
   addPage(e) {
     const element = e.detail.value;
     const page = {
-      number: element.pagenumber,
+      number: element.pagenumber, // Still problems with this. Pages arent being added on sidebar
       title: element.title,
       element: element,
     };

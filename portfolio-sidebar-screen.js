@@ -73,7 +73,7 @@ export class PortfolioSidebarScreen extends DDDSuper(I18NMixin(LitElement)) {
           background-image: url("assets/portfolio-banner-3.jpg");
           background-size: cover;
           background-position: center;
-          height: 150px;
+          height: 100px;
         }
         .content {
           width: 400px;
