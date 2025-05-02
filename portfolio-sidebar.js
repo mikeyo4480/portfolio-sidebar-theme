@@ -41,7 +41,7 @@ export class PortfolioSidebar extends DDDSuper(I18NMixin(LitElement)) {
           background-color: var(--ddd-theme-accent);
           font-family: var(--ddd-font-navigation);
         }
-        
+
         h3 span {
           font-size: var(
             --portfolio-sidebar-label-font-size,
@@ -54,7 +54,7 @@ export class PortfolioSidebar extends DDDSuper(I18NMixin(LitElement)) {
           position: fixed;
           top: 0;
           left: 0;
-          background-image: url("./assets/bg.png");
+          background-image: url("https://github.com/mikeyo4480/portfolio-sidebar-theme/blob/main/assets/bg.png?raw=true");
           background-size: cover;
         }
         a {
@@ -83,11 +83,9 @@ export class PortfolioSidebar extends DDDSuper(I18NMixin(LitElement)) {
           justify-content: center;
           cursor: pointer;
         }
-        
       `,
     ];
   }
-
 
   // Lit render the HTML
   render() {
