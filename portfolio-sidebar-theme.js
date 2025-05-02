@@ -7,6 +7,7 @@ import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 import "./portfolio-sidebar.js";
 import "@haxtheweb/scroll-button/scroll-button.js";
+import "@haxtheweb/awesome-explosion/awesome-explosion.js";
 
 /**
  * `portfolio-sidebar-theme`
@@ -44,7 +45,6 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
           color: var(--ddd-theme-primary);
           background-color: var(--ddd-theme-accent);
           font-family: var(--ddd-font-navigation);
-          overflow-x: hidden;
         }
 
         h3 span {
@@ -57,35 +57,66 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
           display: block;
           width: 310px;
           position: fixed;
-          top: 0;
-          left: 0;
-          bottom: 0;
+          top: var(--ddd-spacing-0);
+          left: var(--ddd-spacing-0);
+          bottom: var(--ddd-spacing-0);
           margin: var(--ddd-spacing-2);
           padding: var(--ddd-spacing-4);
         }
         h1 {
-          font-size: 48px;
-          font-weight: bold;
+          font-size: var(--ddd-font-size-3xs);
+          font-weight: var(--ddd-font-weight-bold);
           color: var(--ddd-theme-default-beaver80);
           text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
           text-align: right;
-          margin-top: 10px;
-          margin-right: 20px;
-          margin-bottom: 0px;
+          margin-top: var(--ddd-spacing-3);
+          margin-bottom: var(--ddd-spacing-0);
         }
         portfolio-sidebar a {
-          font-family: sans-serif;
-          font-size: 30px;
+          font-family: var(--ddd-font-primary);
+          font-size: var(--ddd-font-size-3xs);
           text-align: center;
           justify-content: center;
           border: none;
-          margin-top: 100px;
-          margin-left: 42px;
+          margin-left: var(--ddd-spacing-0);
           text-align: center;
           padding: var(--ddd-spacing-4);
           display: block;
-          color: white;
-          background-color: red;
+          color: white !important;
+          background-color: var(--ddd-theme-default-original87Pink);
+          margin-top: var(--ddd-spacing-5);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        ul {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          height: 100vh;
+        }
+        li {
+          display: block;
+          list-style: none;
+        }
+        @media (max-width: 768px) {
+          portfolio-sidebar-screen {
+            max-width: 200px;
+            margin-left: var(--ddd-spacing-25);
+            padding: var(--ddd-spacing-2);
+          }
+          ul li {
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            height: auto;
+          }
+          portfolio-sidebar a {
+            font-size: var(--ddd-font-size-3xs);
+            padding: var(--ddd-spacing-2);
+          }
+          portfolio-sidebar {
+            font-size: var(--ddd-font-size-3xs);
+            width: 100px;
+          }
         }
       `,
     ];
@@ -98,19 +129,20 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
         <ul>
           ${this.pages.map(
             (page, index) => html`
-              <a
-                href="#${page.number}"
-                @click="${this.linkChange}"
-                data-index="${index}"
-              >
-                ${page.title}
-              </a>
+              <li>
+                <a
+                  href="#section-${page.number}"
+                  @click="${this.linkChange}"
+                  data-index="${index}"
+                >
+                  ${page.title}
+                </a>
+              </li>
             `
           )}
         </ul>
       </portfolio-sidebar>
       <div class="wrapper" @page-added="${this.addPage}">
-        <h1>Portfolio</h1>
         <slot></slot>
       </div>
     `;
@@ -124,6 +156,12 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
         behavior: "smooth",
         block: "start",
       });
+      window.history.pushState(
+        // doesnt account for pasting links smh
+        "data",
+        "test",
+        `#section-${this.pages[index].number}`
+      );
     }
   }
   addPage(e) {
@@ -134,6 +172,8 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
       element: element,
     };
     this.pages = [...this.pages, page];
+    console.log("Page added:", page);
+    console.log("Pages array:", this.pages);
   }
 
   /**
@@ -142,6 +182,28 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
   static get haxProperties() {
     return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url)
       .href;
+  }
+
+  firstUpdated(changedProperties) {
+    if (super.firstUpdated) {
+      super.firstUpdated(changedProperties);
+    }
+    // scroll to the correct target based on hash in the URL
+    setTimeout(() => {
+      const hash = window.location.hash;
+      if (hash) {
+        const sectionId = hash.replace("#section-", "");
+        const page = this.pages.find((p) => p.number === parseInt(sectionId));
+        if (page) {
+          page.element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        } else {
+          console.warn(`No page found for section id: ${sectionId}`);
+        }
+      }
+    }, 0);
   }
 }
 

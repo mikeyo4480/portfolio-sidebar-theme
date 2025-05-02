@@ -20,8 +20,7 @@ export class PortfolioSidebar extends DDDSuper(I18NMixin(LitElement)) {
   constructor() {
     super();
     this.title = "";
-    };
-    
+  }
 
   // Lit reactive properties
   static get properties() {
@@ -42,10 +41,7 @@ export class PortfolioSidebar extends DDDSuper(I18NMixin(LitElement)) {
           background-color: var(--ddd-theme-accent);
           font-family: var(--ddd-font-navigation);
         }
-        .wrapper {
-          margin: var(--ddd-spacing-2);
-          padding: var(--ddd-spacing-4);
-        }
+        
         h3 span {
           font-size: var(
             --portfolio-sidebar-label-font-size,
@@ -58,8 +54,8 @@ export class PortfolioSidebar extends DDDSuper(I18NMixin(LitElement)) {
           position: fixed;
           top: 0;
           left: 0;
-          background-color: var(--ddd-theme-default-slateGray);
-          overflow: hidden;
+          background-image: url("./assets/bg.png");
+          background-size: cover;
         }
         a {
           font-family: sans-serif;
@@ -67,13 +63,11 @@ export class PortfolioSidebar extends DDDSuper(I18NMixin(LitElement)) {
           text-align: center;
           justify-content: center;
           background-color: var(--ddd-theme-default-slateGray);
-          color: white;
           border: none;
-          margin-top: 100px;
           margin-left: 42px;
           text-align: center;
-          padding: var(--ddd-spacing-4);
           display: block;
+          color: white;
         }
         scroll-button {
           position: fixed;
@@ -89,9 +83,11 @@ export class PortfolioSidebar extends DDDSuper(I18NMixin(LitElement)) {
           justify-content: center;
           cursor: pointer;
         }
+        
       `,
     ];
   }
+
 
   // Lit render the HTML
   render() {

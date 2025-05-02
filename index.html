@@ -28,11 +28,27 @@
       portfolio-sidebar {
         width: 250px;
       }
-      img {
+      img.me {
         width: 200px;
         height: auto;
-        border-radius: 30px;
-        max-width: 100%;
+      }
+      .research {
+        display: flex;
+        width: 900px;
+        height: 350px;
+        border-radius: var(--ddd-radius-rounded);
+        margin-left: 350px;
+      }
+      awesome-explosion {
+        height: 50px;
+        width: 50px;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        border-radius: var(--ddd-radius-xl);
+        margin-top: 20px;
+        margin-left: 650px;
       }
 
       #example {
@@ -40,19 +56,102 @@
         background-color: var(--ddd-accent-2);
         color: var(--ddd-primary-17);
       }
-
+      .download-resume-btn {
+      position: fixed;
+      bottom: 1rem;
+      left: 15rem;
+      background: #222;
+      color: var(--ddd-theme-default-white);
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 0.5em 1em;
+      border-radius: var(--ddd-radius-xl);
+      border: 1px solid black;
+      transition: background 0.3s;
+      }
+      button{
+        float: right;
+      }
+      iframe {
+        max-width: 500px;
+        height: 400px;
+        border: none;
+      }
+      img.pennstate {
+        width: 208px;
+        height: 138px;
+        margin-left: 20px;
+        margin-top: 0px;
+      }
+      img.socials {
+        width: 50px;
+        height: 50px;
+        margin-top: 2px;
+        margin-left: 10px;
+        border-radius: 50%;
+      }
+      p.about-me {
+          max-width: 800px;
+          margin: 0 auto;
+        }
+      
+      @media (max-width: 768px) {
+        portfolio-sidebar-screen {
+          margin-left: 100px;
+          padding: var(--ddd-spacing-2);
+          overflow: hidden;
+        }
+        ul {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          height: auto;
+        }
+        portfolio-sidebar a {
+          font-size: 20px;
+          padding: var(--ddd-spacing-2);
+        }
+        portfolio-sidebar {
+          font-size: 20px;
+          width: 100px;
+        }
+        .download-resume-btn {
+          height: 20px;
+          width: 148px;
+          position: fixed;
+          bottom: 0.2rem;
+          left: 12.5rem;
+          background: #222;
+          color: white;
+          text-decoration: none;
+          font-size: 1rem;
+          padding: 0.5em 1em;
+          border-radius: 20px;
+          border: 1px solid black;
+          transition: background 0.3s;
+          overflow: hidden;
+        }
+        img.pennstate {
+          width: 100px;
+          height: 66px;
+        }
+          }
     </style>
     <title>portfolio-sidebar-theme</title>
   </head>
 
   <body>
     <div id="demo">
-      <portfolio-sidebar-theme title="example">
-          <portfolio-sidebar-screen pagenumber="0" title="Intro">
+      <portfolio-sidebar-theme>
+          <portfolio-sidebar-screen pagenumber="0" title="Home">
             <div>
-              <p>Hello Everyone, I am a currently a Sophomore at Penn State University. I am pursuing a B.S in Cybersecurity Analytics and Operations</p>
-              <img src="https://media.licdn.com/dms/image/v2/D4E03AQGfqfp98pNjEQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1678986853045?e=1750896000&v=beta&t=z0sb6EHeICLyMBlGllWuhUTTRnPiDIIZFKOj9345CF8 " alt="Profile Picture">
+              <h1>Michael OHanlon</h1>
+              <p> Cybersecurity Analytics and Operations, Sophomore</p>
+              <p>Intern at Central Bucks School District</p>
+              <img class="me" src="https://media.licdn.com/dms/image/v2/D4E03AQGfqfp98pNjEQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1678986853045?e=1750896000&v=beta&t=z0sb6EHeICLyMBlGllWuhUTTRnPiDIIZFKOj9345CF8 " alt="Profile Picture">
             </div>
+                <a href="https://www.linkedin.com/in/michael--ohanlon/" target="_blank"><img class="socials" src="https://yt3.googleusercontent.com/i6KNxiy3gME-BulL4WnuGkTGqHuSYF8jl1WRn0rXftcJdSYK7dHKcJ3gLAaPc-KfhmLSYPwf824=s900-c-k-c0x00ffffff-no-rj" alt="LinkedIn Logo"></a>
+                <a href="https://github.com/mikeyo4480" target="_blank"><img class="socials" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub Logo"></a>
           </portfolio-sidebar-screen>
           <portfolio-sidebar-screen pagenumber="1" title="Resume">
             <div>
@@ -62,25 +161,31 @@
               <p>The Pennsylvania State University</p>
               <p>Bachelor of Science, Cybersecurity Analytics and Operations</p>
               <p>GPA: 3.82, Dean's List 5 semesters</p>
+              <img class="pennstate" src="https://brand.psu.edu/images/backgrounds/veritcal-1-mark_registered.png" alt="Penn State Logo">
+              <a class="download-resume-btn" href="/assets/resume.pdf" download>Download Resume</a>
             </div>
           </portfolio-sidebar-screen>
           <portfolio-sidebar-screen pagenumber="2" title="Research">
             <div>
               <h1>Research</h1>
               <p>Penn State AT&T Group Data Breach Analysis</p>
-              <img src="/assets/research.png " alt="Research Image">
+              <img class="research" src="/assets/research.png " alt="Research Image">
             </div>
           </portfolio-sidebar-screen>
-          <portfolio-sidebar-screen pagenumber="3" title="Contact">
+          <portfolio-sidebar-screen pagenumber="3" title="About me">
             <div>
-              This is the Portfolio Screen
+              <h1>About me</h1>
+              <p class="about-me">I am currently a Sophomore studying Cybersecurity Analytics and Operations at Penn State University. I'm extremely passionate about everything online! I enjoy HTML, CSS, Python, and much more. I hope to absorb as much as I can and meet some awesome people along with the way.  </p>
             </div>
+            <awesome-explosion></awesome-explosion>
             <div></div>
           </portfolio-sidebar-screen>
-          <portfolio-sidebar-screen pagenumber="3" title="test">
+          <portfolio-sidebar-screen pagenumber="4" title="Contact">
             <div>
               <h1>Contact</h1>
+              <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdrL3hUaaWwqiG0zGWGF-8h3pFoR9ydeZ4E5rCDQjPR-KNbRg/viewform?embedded=true" width="500" height="5" frameborder="0" marginheight="0" marginwidth="0" title="Contact Form">Loading…</iframe>
             </div>
+          </portfolio-sidebar-screen>
             
           
           
@@ -92,6 +197,10 @@
     <script type="module" src="./portfolio-sidebar.js"></script>
     <script type="module" src="./portfolio-sidebar-screen.js"></script>
     <script type="module" src="./scroll-button.js"></script>
+    
+      
+`
+
    
   </body>
 </html>
